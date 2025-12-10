@@ -50,12 +50,12 @@ git clone https://github.com/diriho/White-Noise-Generator.git
 cd White-Noise-Generator
 ```
 
-2. Install dependencies
+2. Install dependencies (once project files are added)
 ```bash
 npm install
 ```
 
-3. Start the development server
+3. Start the development server (once project files are added)
 ```bash
 npm start
 ```
@@ -68,7 +68,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source.
 
 ## 👤 Author
 
