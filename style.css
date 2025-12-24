@@ -1,0 +1,61 @@
+body {
+	background: #fff;
+	margin: 50px 15px 15px;
+	color: #333;
+	text-align: center;
+}
+
+body, select, input {
+	font-family: rubik, arial, helvetica, sans-serif;
+}
+
+h1 {
+	margin-bottom: 0;
+}
+
+p {
+	margin: 15px 0;
+}
+
+a,
+a:hover {
+	color: #E5007E;
+	text-decoration: none;
+}
+
+a:hover {
+	border-bottom: 1px dotted #E5007E;
+}
+
+input[type='number'] {
+	width: 60px;
+}
+
+input[type="color"] {
+	width: 2.5em;
+}
+
+#output {
+	border: 5px solid rgb(200, 200, 200);
+	margin: 0 auto;
+}
+
+canvas {
+	display: none;
+}
+
+#warning {
+	font-style: italic;
+}
+
+table {
+	margin: auto;
+}
+
+th {
+	text-align: right;
+}
+
+td {
+	text-align: left;
+}

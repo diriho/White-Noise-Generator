@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>White Noise Image Generator</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://d3js.org/d3.v3.min.js"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>
+			White Noise Image Generator
+		</h1>
+		<p>
+			This tool allows you to generate images that simulate white noise.
+		</p>
+		<p>
+			<table>
+				<tr>
+					<th>Columns:</th>
+					<td><input type="number" id="lengthH" min="1" value="50" onkeyup="stats()" onchange="stats()"></td>
+				</tr>
+				<tr>
+					<th>Rows:</th>
+					<td><input type="number" id="lengthV" min="1" value="25" onkeyup="stats()" onchange="stats()"></td>
+				</tr>
+				<tr>
+					<th>Square size:</th>
+					<td><input type="number" id="size" min="1" value="5" onkeyup="stats()" onchange="stats()"> pixels</td>
+				</tr>
+				<tr>
+					<th>Colours:</th>
+					<td>
+						<select id="colours" onchange="javascript:changedColourType()">
+							<option value="monochrome">Monochrome</option>
+							<option value="greyscale">Greyscale</option>
+							<option disabled>――――――</option>
+							<option value="rgb_3bit">RGB 3-Bit</option>
+							<option value="rgb_6bit" selected>RGB 6-Bit</option>
+							<option value="rgb_12bit">RGB 12-Bit (Websafe)</option>
+							<option value="rgb_24bit">RGB 24-Bit (Truecolour)</option>
+							<option disabled>――――――</option>
+							<option value="red">Red</option>
+							<option value="green">Green</option>
+							<option value="blue">Blue</option>
+							<option disabled>――――――</option>
+							<option value="custom_2">Custom (2 Colours)</option>
+							<option value="custom_3">Custom (3 Colours)</option>
+							<option value="custom_4">Custom (4 Colours)</option>
+							<option value="custom_5">Custom (5 Colours)</option>
+							<option disabled>――――――</option>
+							<option value="bg_image:output-onlinepngtools.png">Background: Camo 1</option>
+							<option value="bg_image:output-onlinepngtools (1).png">Background: Camo 2</option>
+							<option value="bg_image:output-onlinepngtools (2).png">Background: Camo 3</option>
+							<option value="bg_image:pexels-mohamedelaminemsiouri-2100387.jpg">Background: Desert</option>
+							<option value="bg_image:rocky forest.webp">Background: Rocky Forest</option>
+							<option value="bg_image:woodland.jpg">Background: Woodland</option>
+							<option value="upload">Upload Custom Image</option>
+					</select>
+					</td>
+				</tr>
+				<tr id="bg-upload-row" style="display: none">
+					<th>Upload Background:</th>
+					<td><input type="file" id="bgUpload" accept="image/*" onchange="generate()"></td>
+				</tr>
+				<tr id="custom-colour-row" style="display: none">
+					<th>Custom colours: </th>
+					<td>
+						<input type="color" id="customcolour1" value="#ff0000">
+						<input type="color" id="customcolour2" value="#00ff00">
+						<input type="color" id="customcolour3" value="#0000ff">
+						<input type="color" id="customcolour4" value="#ffff00">
+						<input type="color" id="customcolour5" value="#ff00ff">
+					</td>
+				</tr>
+				<tr id="bias-row" style="display: table-row">
+					<th>Bias:</th>
+					<td>
+						<select id="bias">
+							<option value="verylight">Very Light</option>
+							<option value="light">Light</option>
+							<option value="none" selected>None</option>
+							<option value="dark">Dark</option>
+							<option value="verydark">Very Dark</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>Overlay Image:</th>
+					<td>
+						<select id="overlayImage" onchange="changedOverlayType(); generate()">
+							<option value="none">None</option>
+							<option value="upload">Upload Custom Image</option>
+							<option value="images/OCP.webp">OCP</option>
+							<option value="images/camo-generator.jpg">Camo Generator</option>
+							<option value="images/camouflage-generator-26951.jpg">Camouflage Generator 2</option>
+							<option value="images/camouflage-pattern-maker.jpg">Camouflage Pattern Maker</option>
+							<option value="images/flecktarn.jpg">Flecktarn</option>
+							<option value="images/pixelated.jpg">Pixelated</option>
+							<option value="images/woodland.webp">Woodland</option>
+						</select>
+					</td>
+				</tr>
+				<tr id="overlay-upload-row" style="display: none">
+					<th>Upload Overlay:</th>
+					<td><input type="file" id="overlayUpload" accept="image/*" onchange="generate()"></td>
+				</tr>
+				<tr>
+					<th>Image Scale:</th>
+					<td>
+						<input type="range" id="imageScale" min="10" max="200" value="100" oninput="document.getElementById('scaleValue').innerText = this.value + '%'">
+						<span id="scaleValue">100%</span>
+					</td>
+				</tr>
+				<tr>
+					<th>Position:</th>
+					<td>
+						<button onclick="adjustPosition('up')">Up</button>
+						<button onclick="adjustPosition('down')">Down</button>
+						<button onclick="adjustPosition('left')">Left</button>
+						<button onclick="adjustPosition('right')">Right</button>
+					</td>
+				</tr>
+				<tr>
+					<th>Animation:</th>
+					<td>
+						<button onclick="togglePause()">Pause/Resume</button>
+						<button onclick="restartAnimation()">Restart</button>
+					</td>
+				</tr>
+			</table>
+
+		</p>
+		<p>
+			<span id="warning" style="display:none;">Warning: this is massive and may freeze/crash your browser!<br></span>
+			<input type="button" id="generate" value="Generate" onclick="generate()">
+		</p>
+		<canvas id="noisy"></canvas>
+		<img id="output" alt="White Noise" src="blank.png">
+	
+		<script src="page.js"></script>
+	</body>
+</html>
