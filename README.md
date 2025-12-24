@@ -2,6 +2,7 @@
 
 > A modern web application that generates customizable white noise images to help you in your research or any CV works that involves white noise image generation.
 
+
 ## ✨ Description and motivation
 
 White Noise Generator is a sleek, user-friendly web application designed to produce soothing white noise image directly in your browser.
@@ -25,6 +26,7 @@ This project is built with the following technologies:
 - **HTML5** - Semantic markup and structure
 - **CSS3** - Modern styling and responsive design for a polished user experience
 
+
 ## 🚀 Features
 
 - **Instant White Noise Generation** - Start generating white noise with a single click
@@ -32,7 +34,7 @@ This project is built with the following technologies:
 - **Modern UI** - Clean and intuitive interface built with React
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
 - **Lightweight** - Fast loading and minimal resource consumption
-- 
+
 
 ## 🎯 Getting Started
 
@@ -44,24 +46,22 @@ git clone https://github.com/diriho/White-Noise-Generator.git
 cd White-Noise-Generator
 ```
 
-2. Install dependencies (once project files are added)
-```bash
-npm install
-```
-
-3. Start the development server (once project files are added)
+2. Start the development server (once project files are added)
 ```bash
 Double-click on index.html
 click: "Open with Live Server"
 ```
 
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page if you want to contribute.
 
+
 ## 📝 License
 
 This project is open source.
+
 
 ## 👤 Author
 
